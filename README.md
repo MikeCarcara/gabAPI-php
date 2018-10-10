@@ -2,7 +2,14 @@
 
 Gab.com API | OAuth/PHP Example written in PHP by Michael Carcara <michael.carcara@gmail.com>;
 This is an example PHP script for Gab.com's API to grant an access token for your PHP application
-		
+
+## License
+
+This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Gab.com Developers API	
 
 ## Getting Started
 
@@ -141,11 +148,3 @@ if ($err) {
   echo $response;
 }
 ```
-
-## License
-
-This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Gab.com Developers API
