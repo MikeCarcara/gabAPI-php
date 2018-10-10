@@ -18,8 +18,6 @@ Gab.com PRO account and understanding of PHP scripting
 ### API Examples from https://developers.gab.com
 
 
-```
-
 ### User Details Example
 
 ```
