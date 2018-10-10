@@ -17,10 +17,9 @@ Gab.com PRO account and understanding of PHP scripting
 
 ### Gab.com API Examples
 
-
-```
 https://developers.gab.com
-```
+
+
 ### User Details Example
 
 ```
