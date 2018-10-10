@@ -1,6 +1,7 @@
 # Gab.com API | OAuth/PHP Example
 
-Gab.com API | OAuth/PHP Example written in PHP by Michael Carcara <michael.carcara@gmail.com> This is an example PHP script for Gab.com's API to grant an access token for your PHP application
+Gab.com API | OAuth/PHP Example written in PHP by Michael Carcara <michael.carcara@gmail.com> 
+This is an example PHP script for Gab.com's API to grant an access token for your PHP application
 		
 
 ## Getting Started
