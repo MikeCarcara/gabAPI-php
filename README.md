@@ -17,10 +17,10 @@ Gab.com PRO account and understanding of PHP scripting
 
 ### Gab.com API Examples
 
-https://developers.gab.com
+Complete Documentation : https://developers.gab.com
 
 
-### User Details Example
+#### User Details Example
 
 ```
 $curl = curl_init();
