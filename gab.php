@@ -38,8 +38,8 @@ Do not share your client secret with anyone!
 //
 		define("APP_SCOPE", "read");
 /* 
+SCOPES MUST BE SEPARATED WITH SINGLE SPACES {example: read notifications write-post}
 Scope Variables: read, notifications, write-post, engage-post, engage-post
-"SCOPES MUST BE SEPARATED WITH SINGLE SPACES"
 */
 
 // Allow user to grant your app permissions for this example we are using user feed
@@ -47,11 +47,14 @@ if(!isset($_GET['callback'])){
 	header('Location: https://api.gab.com/oauth/authorize?response_type=code&client_id='.CLIENT_ID.
 		'&scope='.APP_SCOPE.'&redirect_uri='.REDIRECT_URI.'');
 }else{
+	
 //Strip the Gab.com API code from url
 	$strip_uri = explode("&code=", $_SERVER['REQUEST_URI']);
 		$code = $strip_uri[1];
+		
 // Send code to Gab.com via cURL
 	$ch = curl_init( "https://api.gab.com/oauth/token" );
+	
 // Setup request to send JSON via cURL POST
 	$payload = json_encode( 
 		array( 
@@ -59,47 +62,51 @@ if(!isset($_GET['callback'])){
 			"code" => $code, "client_id" => CLIENT_ID,
 			"client_secret" => CLIENT_SECRET, 
 			"redirect_uri" => REDIRECT_URI."" ) );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
-	curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+		
 // Return response instead of printing
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		
 // Send request for user access token
-$access_token = curl_exec($ch);
+	$access_token = curl_exec($ch);
+	
+// Decode JSON Bearer Token
+	$callback = json_decode($access_token);
 
-// Execute Gab.com API documentation of PHP for user feed 
 /*
 
+Execute Gab.com API's documentation of PHP for user feed 
 We will be using my user feed for the example
 
+source: https://developers.gab.com/#d7cf64ab-6b39-4c6a-22c7-e3a1d0f848ef
+
+all code past this point will be up to you (the developer) to troubleshoot and integrate into your app
 */
 
-// Decode JSON Bearer Token
-$callback = json_decode($access_token);
-
-// Execute Gab.com Feed with cURL
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.gab.com/v1.0/users/MichaelCarcara/feed/?after=2018-10-03T19:35:47+00:00",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
+	$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.gab.com/v1.0/users/MichaelCarcara/feed/?after=2018-10-03T19:35:47+00:00",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
     "Authorization: Bearer ".$callback->{'access_token'}
   ),
 ));
 
-$response = curl_exec($curl);
-$err = curl_error($curl);
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
 
-curl_close($curl);
+		curl_close($curl);
 
 if ($err) {
-  echo "cURL Error #:" . $err;
+		echo "cURL Error #:" . $err;
 } else {
-  echo $response;
+		echo $response;
 }
 
 }
