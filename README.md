@@ -15,8 +15,9 @@ Simply upload the gab.php file to your HTTP/HTTPS server and configure the defin
 Gab.com PRO account and understanding of PHP scripting 
 ```
 
+### API Examples from https://developers.gab.com
+```
 ### User Details Example
-
 ```
 $curl = curl_init();
 
