@@ -19,7 +19,9 @@ Gab.com PRO account and understanding of PHP scripting
 
 
 ```
+```
 ### User Details Example
+
 ```
 $curl = curl_init();
 
